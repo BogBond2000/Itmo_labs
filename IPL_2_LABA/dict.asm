@@ -1,5 +1,3 @@
-%include "dict.inc"
-section .text
 find_word:
     push r15
     push r14
@@ -20,10 +18,10 @@ find_word:
     xor rax,rax
     jmp .end
 .equal:
-    mov rax,[rsi+16]
+    call string_lenght
+    add rsi,rax
+    mov rax,rsi ;
 .end:
     pop r14
     pop r15
     ret
-
-
