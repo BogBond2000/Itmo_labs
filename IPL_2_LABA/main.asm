@@ -1,49 +1,32 @@
 global _start
 %include "main.inc"
-%include "word.inc"
-%include "colon.inc"
-%include "lib.inc"
-
-
-
-%define buffer_size 255
-
+%include "words.inc"
 section .data
-    message db "Phrase can not in list", 0
-
+   error_msg db "Phrase can not in list",0
 section .bss
-    buffer resb buffer_size + 1
-
+    buffer resb 256
 section .text
-    global _start
-    extern read_word, find_word, print_string
-
 _start:
-    xor rax,rax
-    mov rdi,buffer
-    mov rsi,buffer_size
-    call read_word
-
-    test rax,rax
-    jz .error
-
-    mov rdi,rax
+    mov rdi, 1
+    mov rax, 0
+    lea rsi, 255
+    mov rdx, SIZE
+    syscall
+    mov byte[buffer+rax-1], 0
+    mov rdi, buffer
     mov rsi, point
-    call find_word ;ошибка тут вылезает
-
-    test rax,rax
+    call find_word
+    test rax, rax
     jz .error
-
-    add rax,8
+    mov rdi, rax
     call print_string
-    ret
-
+    call exit
 .error:
-    mov rdi,message
+    mov rdi, error_msg
     call string_length
-    mov rsi,message
-    mov rdx,rax
-    mov rax,1
-    mov rdi,2
+    mov rsi, error_msg
+    mov rdx, rax
+    mov rax, WRITE
+    mov rdi, STD_ERR
     syscall
     call exit
