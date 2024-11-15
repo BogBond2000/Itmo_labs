@@ -1,3 +1,5 @@
+%include "dict.inc"
+section .text
 find_word:
     push r15
     push r14
