@@ -19,13 +19,13 @@ class TestDictionaryProgram(unittest.TestCase):
 
     def test_1(self):
         stdout, stderr = self.run_tests('third word')
-        self.assertEqual(stdout, 'third word explanation')
-        self.assertEqual(stderr,'')
-
-    def test_2(self):
-        stdout, stderr = self.run_tests('third worssd')
         self.assertEqual(stdout, '')
         self.assertEqual(stderr,'Phrase can not in list')
+
+    def test_2(self):
+        stdout, stderr = self.run_tests('third')
+        self.assertEqual(stdout, 'the third one')
+        self.assertEqual(stderr,'')
 
     def test_3(self):
         stdout, stderr = self.run_tests('third ')
@@ -43,29 +43,29 @@ class TestDictionaryProgram(unittest.TestCase):
         self.assertEqual(stderr,'Phrase can not in list')
 
     def test_6(self):
-        stdout, stderr = self.run_tests('ten word')
-        self.assertEqual(stdout, 'ten word explanation')
-        self.assertEqual(stderr,'')
+        stdout, stderr = self.run_tests('sec_ond')
+        self.assertEqual(stdout, '')
+        self.assertEqual(stderr,'Phrase can not in list')
 
     def test_7(self):
-        stdout, stderr = self.run_tests('fife word')
-        self.assertEqual(stdout, 'fife word explanation')
+        stdout, stderr = self.run_tests('second')
+        self.assertEqual(stdout, 'the second one')
         self.assertEqual(stderr,'')
 
     def test_8(self):
-        stdout, stderr = self.run_tests('two   word')
+        stdout, stderr = self.run_tests('sec')
         self.assertEqual(stdout, '')
         self.assertEqual(stderr,'Phrase can not in list')
 
     def test_9(self):
-        stdout, stderr = self.run_tests('one word')
-        self.assertEqual(stdout, 'one word explanation')
-        self.assertEqual(stderr,'')
+        stdout, stderr = self.run_tests('first')
+        self.assertEqual(stdout, '')
+        self.assertEqual(stderr,'Phrase can not in list')
 
     def test_10(self):
         stdout, stderr = self.run_tests('two word')
-        self.assertEqual(stdout, 'two word explanation')
-        self.assertEqual(stderr,'')
+        self.assertEqual(stdout, '')
+        self.assertEqual(stderr,'Phrase can not in list')
 
 if __name__ == '__main__':
         unittest.main()
